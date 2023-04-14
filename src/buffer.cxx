@@ -70,8 +70,14 @@ bufptr buffer::alloc(const size_t size)
 
     if (size >= 0x8000)
     {
+        // 申请内存空间到uptr，并定义释放方法, free_buffer函数指针
         bufptr buf(reinterpret_cast<buffer*>(new char[size + sizeof(uint) * 2]), &free_buffer);
+        // any_ptr就是万能指针
         any_ptr ptr = reinterpret_cast<any_ptr>(buf.get());
+        // 对内存空间进行序列化 char-> uint-8字节-
+        // 但是不能直接从char* -> int* ;
+        // char* -> void * ->uint * 就是，8字节为一个元素单位 ， 新构建并初始化内存单元全0
+        // 在uint*中，uint[0] = ptr的长度， uint[1]= 0
         __init_b_block(ptr, size);
         return buf;
     }
