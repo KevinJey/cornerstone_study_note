@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+ 
 #include <iostream>
 #include "cornerstone.hxx"
-
+// very nice！
 #define __decl_test__(name) void test_##name()
 #define __run_test__(name)                                            \
     if (std::strcmp(#name, test) == 0 || std::strcmp("*", test) == 0) \
@@ -25,7 +25,7 @@
         test_##name();                                                \
         std::cout << "test " << #name << " passed." << std::endl;     \
     }
-
+// 声明函数
 __decl_test__(async_result);
 __decl_test__(strfmt);
 __decl_test__(buffer);
